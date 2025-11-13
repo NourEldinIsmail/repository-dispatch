@@ -9,7 +9,9 @@ jobs:
       - name: Dump the client payload context
         env:
           PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
-        run: echo "$PAYLOAD_CONTEXT"
+          GH_EVENT: ${{ toJson(github.event) }}
+        run: echo "$PAYLOAD_CONTEXT" \
+          echo "$GH_EVENT"
 
       - uses: actions/checkout@v5
         if: github.event.client_payload.ref != ''
